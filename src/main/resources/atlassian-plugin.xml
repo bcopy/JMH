@@ -1,0 +1,33 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="emailhandler"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="emailhandler-resources" name="emailhandler Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="emailhandler.css" location="/css/emailhandler.css"/>
+        <resource type="download" name="emailhandler.js" location="/js/emailhandler.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>emailhandler</context>
+    </web-resource>
+    
+    <message-handler i18n-name-key="advancedCreateOrCommentHandler.name"
+		key="advancedCreateOrCommentHandler"
+		class="cern.enice.jira.emailhandler.AdvancedCreateOrCommentHandler"
+		add-edit-url="/secure/admin/EditHandlerDetailsUsingParams!default.jspa"
+		weight="10"/>
+    
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    
+</atlassian-plugin>
